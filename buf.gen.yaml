@@ -1,0 +1,17 @@
+# Copyright IBM Corp. 2020, 2026
+# SPDX-License-Identifier: BUSL-1.1
+
+version: v1
+plugins:
+  - name: go
+    out: .
+    opt:
+      - paths=import
+  - name: go-grpc
+    out: .
+    opt:
+      - paths=import
+  - name: grpc-gateway
+    out: .
+    opt:
+      - paths=import

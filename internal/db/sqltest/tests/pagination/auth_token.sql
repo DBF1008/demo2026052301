@@ -1,0 +1,12 @@
+-- Copyright IBM Corp. 2020, 2026
+-- SPDX-License-Identifier: BUSL-1.1
+
+begin;
+  select plan(2);
+
+  select has_index('auth_token', 'auth_token_create_time_public_id_idx', array['create_time', 'public_id']);
+  select has_index('auth_token', 'auth_token_update_time_public_id_idx', array['update_time', 'public_id']);
+
+  select * from finish();
+
+rollback;

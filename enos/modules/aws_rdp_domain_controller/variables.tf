@@ -1,0 +1,78 @@
+# Copyright IBM Corp. 2020, 2026
+# SPDX-License-Identifier: BUSL-1.1
+
+variable "vpc_id" {
+  type        = string
+  description = "Id of VPC to add additional infra resources to."
+}
+
+variable "extra_users" {
+  type        = number
+  description = "Number of additional domain users to be created"
+  default     = 0
+
+  validation {
+    condition     = var.extra_users >= 0 && floor(var.extra_users) == var.extra_users
+    error_message = "extra_users must be a whole number greater than or equal to 0."
+  }
+}
+
+variable "extra_users_password_base" {
+  type        = string
+  description = "base of password for the extra users"
+  default     = "p@ssw0rd00!"
+}
+
+variable "extra_users_username_base" {
+  type        = string
+  description = "base of username for the extra users"
+  default     = "user"
+}
+
+# =================================================================
+# ec2 instance configuration
+# =================================================================
+variable "server_version" {
+  type        = string
+  description = "Server version for the windows instance"
+  default     = "2025"
+}
+
+variable "instance_type" {
+  type        = string
+  description = "The AWS instance type to use for servers."
+  default     = "m7i-flex.xlarge"
+}
+
+variable "prefix" {
+  type        = string
+  description = "Prefix used to name various infrastructure components. Alphanumeric characters only."
+  default     = "enos"
+}
+
+variable "root_block_device_size" {
+  type        = string
+  description = "The volume size of the root block device."
+  default     = 128
+}
+
+variable "aws_key_pair_name" {
+  type        = string
+  description = "key_name for the aws_key_pair resource"
+  default     = "RDPKey"
+}
+
+variable "ip_version" {
+  type        = string
+  description = "IP version to use for security group rules. Valid values are '4', '6', or 'dual'."
+  default     = "4"
+}
+
+# =================================================================
+# domain information
+# =================================================================
+variable "active_directory_domain" {
+  type        = string
+  description = "The name of the Active Directory domain to be created on the Windows Domain Controller."
+  default     = "mydomain.com"
+}
